@@ -219,20 +219,20 @@ class MAIN_CONTROLLER(TEMPLATES):
                     print(mess_resp)                
                 else:
                     print("На данный момент нет ни одной рекомендации согласно заданным условиям фильтра")
-                input_varios = input("Продолжить/сменить торговые параметры?(1/2)", )
-                if input_varios.strip() == "2":
-                    new_trades_input_data = input("Введите торговую пару, размер ставки позиции (в usdt) и кредитное плечо. Например: btcusdt 20 2", )
-                    dataa = [x for x in new_trades_input_data.split(' ') if x and x.strip()]
-                    self.symbol = dataa[0].upper()  
-                    self.start_depo = self.depo = round(float(dataa[1]), 2)
-                    self.lev_size = int(float(dataa[2])) 
-                    print(f"Текущая торговая пара: {self.symbol}")
-                    print(f"Текущий депозит: {self.depo}")
-                    if self.set_leverage_template():
-                        print(f"Текущее кредитное плечо: {self.lev_size}")
-                        self.was_change_leverage_true = True
-                    else:
-                        print(f"Не удалось установить кредитное плеч...")
+            input_varios = input("Продолжить/сменить торговые параметры?(1/2)", )
+            if input_varios.strip() == "2":
+                new_trades_input_data = input("Введите торговую пару, размер ставки позиции (в usdt) и кредитное плечо. Например: btcusdt 20 2", )
+                dataa = [x for x in new_trades_input_data.split(' ') if x and x.strip()]
+                self.symbol = dataa[0].upper()  
+                self.start_depo = self.depo = round(float(dataa[1]), 2)
+                self.lev_size = int(float(dataa[2])) 
+                print(f"Текущая торговая пара: {self.symbol}")
+                print(f"Текущий депозит: {self.depo}")
+                if self.set_leverage_template():
+                    print(f"Текущее кредитное плечо: {self.lev_size}")
+                    self.was_change_leverage_true = True
+                else:
+                    print(f"Не удалось установить кредитное плеч...")
 
         self.run_flag = True
         in_position = False
@@ -536,8 +536,8 @@ class TG_MANAGER(MAIN_CONTROLLER):
                 else:
                     self.bot.send_message(message.chat.id, f"Не удалось установить кредитное плеч...") 
             # /////////////////////////////////////////////////////////////////////////////// 
-            self.bot.polling()
-            # self.bot.infinity_polling()
+            # self.bot.polling()
+            self.bot.infinity_polling()
         except Exception as ex: 
             print(ex)
 
